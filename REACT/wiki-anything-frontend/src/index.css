@@ -1,0 +1,83 @@
+/* Global reset */
+* {
+  box-sizing: border-box;
+}
+
+/* Page base */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #88b9d7;
+  color: #c46f6f;
+}
+
+/* App container */
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Header */
+header {
+  margin-bottom: 24px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+/* Slug switcher */
+.slug-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.slug-form input {
+  flex: 1;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.slug-form button {
+  padding: 8px 12px;
+}
+
+/* Page title */
+.page-title {
+  margin-bottom: 16px;
+}
+
+/* Blocks */
+.block {
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+/* Code block */
+.block code {
+  display: block;
+  padding: 12px;
+  background: #9aeeaf;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 13px;
+  white-space: pre-wrap;
+}
+
+/* Add block form */
+.add-block-form {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-block-form textarea,
+.add-block-form select,
+.add-block-form button {
+  padding: 8px;
+  font-size: 14px;
+}
