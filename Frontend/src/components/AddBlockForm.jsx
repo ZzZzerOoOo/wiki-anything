@@ -1,48 +1,47 @@
-import { useState } from "react";
+import { Form, Select, Input } from "antd";
 import { addBlock } from "../api/blocks";
 
-function AddBlockForm({ pageId, onBlockAdded }) {
-  const [type, setType] = useState("TEXT");
-  const [content, setContent] = useState("");
-  const [loading, setLoading] = useState(false);
+const { TextArea } = Input;
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-
-    setLoading(true);
-    try {
-      const newBlock = await addBlock(pageId, {
-        type,
-        content,
-      });
-      onBlockAdded(newBlock);
-      setContent("");
-    } finally {
-      setLoading(false);
-    }
+function AddBlockForm({ pageId, onBlockAdded, form }) {
+  async function handleFinish(values) {
+    const newBlock = await addBlock(pageId, values);
+    onBlockAdded(newBlock);
+    form.resetFields();
   }
 
   return (
-    <form className="add-block-form" onSubmit={handleSubmit}>
-      <select value={type} onChange={e => setType(e.target.value)}>
-        <option value="TEXT">TEXT</option>
-        <option value="CODE">CODE</option>
-      </select>
+    <Form
+      form={form}
+      layout="vertical"
+      onFinish={handleFinish}
+      initialValues={{ type: "TEXT" }}
+    >
+      <Form.Item
+        label="Block Type"
+        name="type"
+        rules={[{ required: true }]}
+      >
+        <Select>
+          <Select.Option value="TEXT">TEXT</Select.Option>
+          <Select.Option value="CODE">CODE</Select.Option>
+        </Select>
+      </Form.Item>
 
-      <br />
-
-      <textarea
-        value={content}
-        onChange={e => setContent(e.target.value)}
-        rows={type === "CODE" ? 6 : 3}
-      />
-
-      <br />
-
-      <button disabled={loading || !content}>
-        Add Block
-      </button>
-    </form>
+      <Form.Item
+        label="Content"
+        name="content"
+        rules={[
+          { required: true, message: "Content cannot be empty" },
+        ]}
+      >
+        <TextArea
+          rows={
+            form.getFieldValue("type") === "CODE" ? 6 : 3
+          }
+        />
+      </Form.Item>
+    </Form>
   );
 }
 

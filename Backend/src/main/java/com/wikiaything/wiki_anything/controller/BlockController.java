@@ -51,7 +51,7 @@ public class BlockController {
     }
 
     @DeleteMapping("/pages/{pageId}/blocks/{id}")
-    public BlockResponse deleteBlock(@PathVariable Long pageId, 
+    public List<BlockResponse> deleteBlock(@PathVariable Long pageId, 
         @PathVariable("id") int id) {
             System.out.println("Deleting block: " + id + " from page: " + pageId);
             return blockService.deleteBlock(pageId, id);

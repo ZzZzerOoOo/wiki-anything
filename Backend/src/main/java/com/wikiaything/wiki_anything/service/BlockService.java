@@ -2,6 +2,7 @@ package com.wikiaything.wiki_anything.service;
 
 import java.util.Comparator;
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,17 +42,22 @@ public class BlockService {
 
         return toBlockResponse(saved);
     }
-    public BlockResponse deleteBlock(Long pageId, int blockId) {
+    public List<BlockResponse> deleteBlock(Long pageId, int blockOrdexIndex) {
         Page page = pageRepository.findById(pageId)
                 .orElseThrow(() -> new IllegalArgumentException("Page not found"));
+            
         Block block = page.getBlocks().stream()
-                .filter(b -> b.getOrderIndex() == blockId)
+                .filter(b -> b.getOrderIndex() == blockOrdexIndex)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Block not found"));
                 System.out.println("ii");
         page.getBlocks().remove(block);
-        blockRepository.delete(block);
-        return toBlockResponse(block);
+        for(Block b : page.getBlocks()){
+            if(b.getOrderIndex() > blockOrdexIndex) {
+                b.setOrderIndex(b.getOrderIndex()-1);
+            }
+        }
+        return page.getBlocks().stream().map(this::toBlockResponse).toList();
     }
 
     public BlockResponse editBlock(Long pageId, UpdateBlockRequest request) {

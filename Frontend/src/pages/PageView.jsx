@@ -6,8 +6,11 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import NotFound from "./NotFound";
 import { deleteBlock,editBlock, updateBlock } from "../api/blocks";
+import { Button, Modal, Form } from "antd";
 
 function PageView() {
+  const [open, setOpen] = useState(false);
+  const [form] = Form.useForm();
   const [page, setPage] = useState(null);
   const [error, setError] = useState(null);
 
@@ -29,10 +32,10 @@ function PageView() {
   }
 
   async function handleDeleteBlock(pageId,blockId) {
-  await deleteBlock(pageId,blockId);
+  const updatedBlocks = await deleteBlock(pageId,blockId);
   setPage(prev => ({
       ...prev,
-      blocks: prev.blocks.filter(b => b.orderIndex !== blockId),
+      blocks: updatedBlocks,
     }));
   }
   async function handleBlockEdited(pageId,block) {
@@ -71,10 +74,31 @@ function PageView() {
       />
         ))}
 
+    <Button
+        type="dashed"
+        block
+        style={{ marginTop: 16 }}
+        onClick={() => setOpen(true)}
+      >
+        + Add Block
+    </Button>
+
+    <Modal
+        title="Add Block"
+        open={open}
+        onCancel={() => setOpen(false)}
+        onOk={() => form.submit()}
+        okText="Add"
+      >
       <AddBlockForm
         pageId={page.id}
-        onBlockAdded={handleBlockAdded}
+        onBlockAdded={(block) => {
+          handleBlockAdded(block);
+          setOpen(false);
+        }}
+        form={form}
       />
+    </Modal>
 
     </div>
   );

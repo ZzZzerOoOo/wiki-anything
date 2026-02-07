@@ -28,7 +28,7 @@ export async function deleteBlock(pageId, blockId) {
   else{
     
   }
-
+return res.json();
 
 }
 
