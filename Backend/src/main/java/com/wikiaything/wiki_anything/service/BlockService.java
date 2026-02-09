@@ -1,5 +1,6 @@
 package com.wikiaything.wiki_anything.service;
 
+import java.time.Instant;
 import java.util.Comparator;
 import java.util.List;
 
@@ -37,9 +38,10 @@ public class BlockService {
         block.setContent(request.content());
         block.setOrderIndex(nextOrderIndex);
         block.setPage(page);
-
+        
+        
         Block saved = blockRepository.save(block);
-
+        page.setUpdatedAt(Instant.now());
         return toBlockResponse(saved);
     }
     public List<BlockResponse> deleteBlock(Long pageId, int blockOrdexIndex) {
@@ -57,6 +59,7 @@ public class BlockService {
                 b.setOrderIndex(b.getOrderIndex()-1);
             }
         }
+        page.setUpdatedAt(Instant.now());
         return page.getBlocks().stream().map(this::toBlockResponse).toList();
     }
 
@@ -77,7 +80,7 @@ public class BlockService {
 
         Block saved = blockRepository.save(block);
 
-
+        page.setUpdatedAt(Instant.now());
         return toBlockResponse(saved);
     }
     public List<BlockResponse> moveBlock(Long pageId, UpdateBlockRequest request, String direction) {
@@ -91,6 +94,7 @@ public class BlockService {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Block not found"));
         
+        page.setUpdatedAt(Instant.now());
         if(direction.equalsIgnoreCase("up") && block.getOrderIndex() > 0) {
             Block otherBlock = page.getBlocks().stream()
                 .filter(b -> b.getOrderIndex() == OrderIndex - 1)

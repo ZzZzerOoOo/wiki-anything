@@ -1,5 +1,5 @@
 import { Form, Select, Input } from "antd";
-import { addBlock } from "../api/blocks";
+import { addBlock } from "../../api/blocks";
 
 const { TextArea } = Input;
 

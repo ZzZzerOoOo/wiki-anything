@@ -1,6 +1,6 @@
 const antdTheme = {
   token: {
-    colorPrimary: "#1677ff",
+    colorPrimary: "#57595B",
     colorBgBase: "#ced9e9",
     colorBgContainer: "#f8ecec",
     colorText: "#1f2937",

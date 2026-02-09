@@ -1,10 +1,10 @@
-import Header from "./components/Header";
 import PageView from "./pages/PageView";
 import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
 import HomePage from "./pages/HomePage";
+import NewPage from "./pages/newPages";
 function App() {
 
   const [value, setValue] = useState("");
@@ -33,6 +33,7 @@ function App() {
       <Routes>
           {/* <Route path="/" element={<Navigate to="/pages/home" />} /> */}
            <Route path="/" element={<HomePage />} />
+           <Route path="/pages/new" element={<NewPage />} />
           <Route path="/pages/:slug" element={<PageView />} />
           <Route path="*" element={<NotFound />}/>
         </Routes>
