@@ -51,10 +51,10 @@ public class Page {
     private List<Block> blocks = new ArrayList<>();
 
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
 
