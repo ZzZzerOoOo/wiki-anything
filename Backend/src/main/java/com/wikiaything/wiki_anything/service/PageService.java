@@ -65,7 +65,8 @@ private PageResponse toPageResponse(Page page) {
             page.getId(),
             page.getTitle(),
             page.getSlug(),
-            blocks
+            blocks,
+            page.getUpdatedAt()
     );
 }
 

@@ -7,3 +7,11 @@ export async function getPageBySlug(slug) {
   }
   return res.json();
 }
+
+export async function getPages() {
+  const res = await fetch(`${BASE_URL}/pages/`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch pages");
+  }
+  return res.json();
+}

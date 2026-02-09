@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getPages } from "../api/pages";
 
 export default function HomePage() {
   const [pages, setPages] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8080/pages")
-      .then(res => res.json())
-      .then(data => setPages(data))
+    getPages()
+      .then(setPages)
       .catch(err => console.error(err));
   }, []);
-
 
   function HeroSection({ onCreate }) {
   return (
