@@ -30,7 +30,7 @@ function App() {
         
 
       <Routes>
-          <Route path="/" element={<Navigate to="/pages/home" />} />
+          <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/pages/:slug" element={<PageView />} />
           <Route path="*" element={<NotFound />}/>
         </Routes>
