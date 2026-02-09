@@ -14,9 +14,8 @@ public class WikiAnythingApplication {
 		SpringApplication.run(WikiAnythingApplication.class, args);
 	}
 
-	@Configuration
-
-public class CorsConfig {
+@Configuration
+public static class CorsConfig {
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {
@@ -24,7 +23,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:3000")
+                        .allowedOriginPatterns("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*");
             }
