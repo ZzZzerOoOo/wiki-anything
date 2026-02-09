@@ -1,5 +1,6 @@
 package com.wikiaything.wiki_anything.model;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -38,6 +41,7 @@ public class Page {
     @Column(nullable = false, unique = true)
     private String slug;
 
+    
     @OneToMany(
             mappedBy = "page",
             cascade = CascadeType.ALL,
@@ -45,4 +49,24 @@ public class Page {
     )
     @OrderBy("orderIndex ASC")
     private List<Block> blocks = new ArrayList<>();
+
+
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @Column(nullable = false)
+    private Instant updatedAt;
+
+
+    @PrePersist
+    protected void onCreate() {
+        Instant now = Instant.now();
+        this.createdAt = now;
+        this.updatedAt = now;
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = Instant.now();
+    }
 }

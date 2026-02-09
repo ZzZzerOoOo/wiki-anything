@@ -39,6 +39,18 @@ private final PageRepository pageRepository;
         return toPageResponse(page);
     }
 
+    public List<PageResponse> getAllPages() {
+        return pageRepository.findAll().stream()
+                .map(this::toPageResponse)
+                .toList();
+    }
+    public PageResponse deletePage(String slug) {
+        Page page = pageRepository.findBySlug(slug)
+                .orElseThrow(() -> new IllegalArgumentException("Page not found"));
+        pageRepository.delete(page);
+        return toPageResponse(page);
+    }
+
 // MAPPER: PUT BELOW TO UTILITY LATER
 private PageResponse toPageResponse(Page page) {
     List<BlockResponse> blocks = page.getBlocks().stream()

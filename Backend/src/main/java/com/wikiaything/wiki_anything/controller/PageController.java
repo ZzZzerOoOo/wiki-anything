@@ -1,6 +1,7 @@
 package com.wikiaything.wiki_anything.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,14 @@ public class PageController {
     public PageResponse getPage(@PathVariable String slug) {
         System.out.println("Fetching page with slug: " + slug);
         return pageService.getPageResponseBySlug(slug);
+    }
+    @GetMapping("/")
+    public List<PageResponse> getPages() {
+        return pageService.getAllPages();
+    }
+    @DeleteMapping("/{slug}")
+    public PageResponse deletePage(@PathVariable String slug) {
+        return pageService.deletePage(slug);
     }
 }
 
