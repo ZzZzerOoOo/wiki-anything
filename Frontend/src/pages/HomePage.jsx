@@ -12,12 +12,13 @@ export default function HomePage() {
       .catch(err => console.error(err));
   }, []);
 
+
   function HeroSection({ onCreate }) {
   return (
-    <div style={styles.hero}>
+    <div className="hero">
       <h1>Wiki Anything</h1>
       <p>A block-based wiki for organizing knowledge, built for developers.</p>
-      <button style={styles.primaryButton} onClick={onCreate}>
+      <button className="primaryButton" onClick={onCreate}>
         Create New Page
       </button>
     </div>
@@ -26,7 +27,7 @@ export default function HomePage() {
 
   function Section({ title, children }) {
     return (
-      <div style={styles.section}>
+      <div className="section">
         <h2>{title}</h2>
         {children}
       </div>
@@ -35,12 +36,12 @@ export default function HomePage() {
 
   function PageRow({ page, onClick }) {
     return (
-      <div style={styles.pageRow} onClick={onClick}>
+      <div className="pageRow" onClick={onClick}>
         <div>
           <strong>{page.title}</strong>
-          <div style={styles.slug}>{page.slug}</div>
+          <div className="slug">{page.slug}</div>
         </div>
-        <div style={styles.date}>
+        <div className="date">
           {new Date(page.updatedAt).toLocaleDateString()}
         </div>
       </div>
@@ -49,9 +50,9 @@ export default function HomePage() {
 
   function EmptyState({ onCreate }) {
     return (
-      <div style={styles.empty}>
+      <div className="empty">
         <p>You don’t have any pages yet.</p>
-        <button style={styles.secondaryButton} onClick={onCreate}>
+        <button className="secondaryButton" onClick={onCreate}>
           Create your first page
         </button>
       </div>
@@ -64,7 +65,7 @@ export default function HomePage() {
     .slice(0, 5);
 
   return (
-    <div style={styles.container}>
+      <div className="container">
       <HeroSection onCreate={() => navigate("/pages/new")} />
 
       {recentPages.length > 0 && (

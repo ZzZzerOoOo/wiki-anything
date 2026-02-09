@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import NotFound from "./pages/NotFound";
+import HomePage from "./pages/HomePage";
 function App() {
 
   const [value, setValue] = useState("");
@@ -17,20 +18,21 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      {/* <Header /> */}
 
-      <form className="slug-form" onSubmit={handleSubmit}>
+      {/* <form className="slug-form" onSubmit={handleSubmit}>
         <input
           value={value}
           onChange={e => setValue(e.target.value)}
           placeholder="Enter page slug"
         />
         <button>Go</button>
-        </form>
+        </form> */}
         
 
       <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/" element={<Navigate to="/pages/home" />} />
+           {/* <Route path="/" element={<HomePage />} /> */}
           <Route path="/pages/:slug" element={<PageView />} />
           <Route path="*" element={<NotFound />}/>
         </Routes>

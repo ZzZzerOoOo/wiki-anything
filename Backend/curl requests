@@ -1,9 +1,14 @@
-curl -X POST http://localhost:8080/pages \
+curl -X POST http://13.232.61.18:8080/pages \
   -H "Content-Type: application/json" \
-  -d '{"title":"home"}'
+  -d '{"title":"homeee"}'
 
 curl -X POST http://localhost:8080/pages/1/blocks \
   -H "Content-Type: application/json" \
   -d '{"type":"TEXT","content":"Hello World, this is home."}'
 
 curl http://localhost:8080/pages/spring-boot
+
+
+curl -X DELETE http://13.232.61.18:8080/pages \
+  -H "Content-Type: application/json" \
+  -d '{"title":"homee"}'
