@@ -13,13 +13,13 @@ export default function HomePage() {
       .then(setPages)
       .catch(err => console.error(err));
   }, []);
-  
+
   if (pages === null) {
   return null; // or spinner later
 }
   return (
     <div >
-      <Header />
+      {/* <Header /> */}
       <HeroSection />
       <Divider />
       <RecentPages pages={pages} />

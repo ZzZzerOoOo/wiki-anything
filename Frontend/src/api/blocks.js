@@ -1,4 +1,4 @@
-const BASE_URL = "http://13.232.61.18:8080";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export async function addBlock(pageId, block) {
   const res = await fetch(`${BASE_URL}/pages/${pageId}/blocks`, {

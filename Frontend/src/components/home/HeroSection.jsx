@@ -10,13 +10,13 @@ export default function HeroSection() {
   return (
     <div>
       <Paragraph type="secondary">
-        A block-based wiki for organizing knowledge.
+        A block-based wiki for organizing knowledge. Click below to generate your first page and start building your wiki! 
       </Paragraph>
 
       <Button
         type="primary"
         icon={<PlusOutlined />}
-        size="large"
+        size="medium"
         onClick={() => navigate("/pages/new")}
       >
         Create New Page

@@ -82,7 +82,7 @@ function PageView() {
   return (
     <div>
   
-      <Header />
+      {/* <Header /> */}
        <Title level={2}>{page.title}</Title>
        <Paragraph type="secondary" style={{fontSize: 14}}>Last updated: {new Date(page.updatedAt).toLocaleString()}</Paragraph>
       {page.blocks.map(block => (
