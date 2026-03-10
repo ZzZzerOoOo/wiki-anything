@@ -10,7 +10,9 @@ import com.wikiaything.wiki_anything.DTO.BlockResponse;
 import com.wikiaything.wiki_anything.DTO.CreatePageRequest;
 import com.wikiaything.wiki_anything.DTO.PageResponse;
 import com.wikiaything.wiki_anything.model.Page;
+import com.wikiaything.wiki_anything.model.Wiki;
 import com.wikiaything.wiki_anything.repository.PageRepository;
+import com.wikiaything.wiki_anything.repository.WikiRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class PageService {
 private final PageRepository pageRepository;
+private final WikiRepository wikiRepository;
    public PageResponse createPage(CreatePageRequest request) {
         String title = request.title();
         Long wikiId = request.wikiId();
@@ -27,8 +30,12 @@ private final PageRepository pageRepository;
             throw new IllegalArgumentException("Page with same title already exists");
         }   
 
+        Wiki wiki = wikiRepository.findById(wikiId)
+        .orElseThrow(() -> new RuntimeException("Wiki not found"));
+
         Page page = new Page();
         page.setTitle(title);
+        page.setWiki(wiki);
         page.setSlug(slug);
         
         return toPageResponse(pageRepository.save(page));

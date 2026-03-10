@@ -1,3 +1,7 @@
+curl -X POST http://13.232.61.18:8080/pages \
+  -H "Content-Type: application/json" \
+  -d '{"title":"homeee","wikiId":1}'
+
 curl -X POST http://13.232.61.18:8080/wiki \
   -H "Content-Type: application/json" \
   -d '{"title":"Factorio"}'

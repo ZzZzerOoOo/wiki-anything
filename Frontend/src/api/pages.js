@@ -8,7 +8,7 @@ export async function createPage(wikiId,title) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({title: title,
-      wikiId: wikiId
+      wikiId: 1
   }),
   });
 
