@@ -30,7 +30,7 @@ import lombok.Setter;
         uniqueConstraints = {
         @UniqueConstraint(
             name = "uk_page_wiki_slug",
-            columnNames = {"wiki_id", "slug"}
+            columnNames = {"wikiId", "slug"}
         )
     }
 )
@@ -83,6 +83,6 @@ public class Page {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wiki_id", nullable = false)
+    @JoinColumn(name = "wikiId", nullable = false)
     private Wiki wiki;
 }

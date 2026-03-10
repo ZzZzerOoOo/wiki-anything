@@ -21,9 +21,9 @@ public class PageService {
 private final PageRepository pageRepository;
    public PageResponse createPage(CreatePageRequest request) {
         String title = request.title();
-        String wikiId = request.wikiId();
+        Long wikiId = request.wikiId();
         String slug = generateSlug(title);  
-        if (pageRepository.existsBySlugAndwiki_id(slug,wikiId)) {
+        if (pageRepository.existsBySlugAndWikiId(slug,wikiId)) {
             throw new IllegalArgumentException("Page with same title already exists");
         }   
 
@@ -34,8 +34,8 @@ private final PageRepository pageRepository;
         return toPageResponse(pageRepository.save(page));
     }
 
-    public PageResponse getPageResponseBySlug(String slug, String wikiId) {
-        Page page = pageRepository.findBySlugAndwiki_id(slug,wikiId)
+    public PageResponse getPageResponseBySlug(String slug, Long wikiId) {
+        Page page = pageRepository.findBySlugAndWikiId(slug,wikiId)
                 .orElseThrow(() -> new IllegalArgumentException("Page not found"));
         return toPageResponse(page);
     }
@@ -45,8 +45,8 @@ private final PageRepository pageRepository;
                 .map(this::toPageResponse)
                 .toList();
     }
-    public PageResponse deletePage(String slug, String wikiId) {
-        Page page = pageRepository.findBySlugAndwiki_id(slug,wikiId)
+    public PageResponse deletePage(String slug, Long wikiId) {
+        Page page = pageRepository.findBySlugAndWikiId(slug,wikiId)
                 .orElseThrow(() -> new IllegalArgumentException("Page not found"));
         pageRepository.delete(page);
         return toPageResponse(page);

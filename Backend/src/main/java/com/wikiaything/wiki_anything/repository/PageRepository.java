@@ -8,8 +8,8 @@ import com.wikiaything.wiki_anything.model.Page;
 
 public interface PageRepository extends JpaRepository<Page, Long> {
 
-    Optional<Page> findBySlugAndwiki_id(String slug,String wiki_id);
+    Optional<Page> findBySlugAndWikiId(String slug, Long wiki_id);
 
-    boolean existsBySlugAndwiki_id(String slug, String wiki_id);
+    boolean existsBySlugAndWikiId(String slug, Long wiki_id);
 }
 

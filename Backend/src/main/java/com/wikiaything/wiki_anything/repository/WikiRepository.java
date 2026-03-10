@@ -10,6 +10,6 @@ public interface WikiRepository extends JpaRepository<Wiki, Long> {
 
     Optional<Wiki> findBySlug(String slug);
 
-    boolean existsBySlugAnd(String slug);
+    boolean existsBySlug(String slug);
 }
 

@@ -32,7 +32,7 @@ public class PageController {
     }
 
     @GetMapping("/{wikiId}/{slug}/")
-    public PageResponse getPage(@PathVariable String wikiId,@PathVariable String slug) {
+    public PageResponse getPage(@PathVariable Long wikiId,@PathVariable String slug) {
         // System.out.println("Fetching page with slug: " + slug);
         return pageService.getPageResponseBySlug(slug,wikiId);
     }
@@ -41,7 +41,7 @@ public class PageController {
         return pageService.getAllPages();
     }
     @DeleteMapping("/{wikiId}/{slug}/")
-    public PageResponse deletePage(@PathVariable String wikiId,@PathVariable String slug) {
+    public PageResponse deletePage(@PathVariable Long wikiId,@PathVariable String slug) {
         return pageService.deletePage(slug,wikiId);
     }
 }

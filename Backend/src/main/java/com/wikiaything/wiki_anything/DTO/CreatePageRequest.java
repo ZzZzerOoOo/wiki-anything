@@ -4,5 +4,5 @@ import jakarta.validation.constraints.NotBlank;
 
 public record CreatePageRequest(
         @NotBlank String title,
-        @NotBlank String wikiId
+        @NotBlank Long wikiId
 ) {}
