@@ -9,7 +9,7 @@ export default function AllPages({ pages }) {
     <>
       <Title level={4}>All Pages</Title>
 
-      {pages.length === 0 ? (
+      {( pages == null || pages.length === 0) ? (
         <EmptyState />
       ) : (
         <List

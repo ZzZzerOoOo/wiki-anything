@@ -18,6 +18,7 @@ import jakarta.persistence.OrderBy;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,7 +26,15 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "pages")
+@Table(name = "pages",
+        uniqueConstraints = {
+        @UniqueConstraint(
+            name = "uk_page_wiki_slug",
+            columnNames = {"wiki_id", "slug"}
+        )
+    }
+)
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -41,7 +50,7 @@ public class Page {
     private String title;
 
     @NotBlank
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String slug;
 
     

@@ -31,18 +31,18 @@ public class PageController {
         return pageService.createPage(request);
     }
 
-    @GetMapping("/{slug}")
-    public PageResponse getPage(@PathVariable String slug) {
-        System.out.println("Fetching page with slug: " + slug);
-        return pageService.getPageResponseBySlug(slug);
+    @GetMapping("/{wikiId}/{slug}/")
+    public PageResponse getPage(@PathVariable String wikiId,@PathVariable String slug) {
+        // System.out.println("Fetching page with slug: " + slug);
+        return pageService.getPageResponseBySlug(slug,wikiId);
     }
     @GetMapping("/")
     public List<PageResponse> getPages() {
         return pageService.getAllPages();
     }
-    @DeleteMapping("/{slug}")
-    public PageResponse deletePage(@PathVariable String slug) {
-        return pageService.deletePage(slug);
+    @DeleteMapping("/{wikiId}/{slug}/")
+    public PageResponse deletePage(@PathVariable String wikiId,@PathVariable String slug) {
+        return pageService.deletePage(slug,wikiId);
     }
 }
 

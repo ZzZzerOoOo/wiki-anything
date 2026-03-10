@@ -4,7 +4,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import NewPage from "./pages/newPages";
+import NewWiki from "./pages/newWiki";
+import WikiView from "./pages/WikiView";
 import AppLayout from "./components/common/AppLayout";
+
 function App() {
 
   const [value, setValue] = useState("");
@@ -30,7 +33,7 @@ function App() {
               />
 
               <Route
-                path="/pages/new"
+                path="/pages/newPage"
                 element={
                   <AppLayout>
                     <NewPage />
@@ -39,10 +42,27 @@ function App() {
               />
 
               <Route
+                path="/wiki/newWiki"
+                element={
+                  <AppLayout>
+                    <NewWiki />
+                  </AppLayout>
+                }
+              />
+              <Route
                 path="/pages/:slug"
                 element={
                   <AppLayout>
                     <PageView />
+                  </AppLayout>
+                }
+              />
+
+              <Route
+                path="/wiki/:slug"
+                element={
+                  <AppLayout>
+                    <WikiView />
                   </AppLayout>
                 }
               />

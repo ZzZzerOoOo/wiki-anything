@@ -17,9 +17,9 @@ export default function HeroSection() {
         type="primary"
         icon={<PlusOutlined />}
         size="medium"
-        onClick={() => navigate("/pages/new")}
+        onClick={() => navigate("/wiki/newWiki")}
       >
-        Create New Page
+        Create New Wiki
       </Button>
     </div>
   );

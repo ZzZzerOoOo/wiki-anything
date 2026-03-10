@@ -40,6 +40,9 @@ public class Wiki {
     @Column(nullable = false, unique = true)
     private String slug;
 
+    @Column(nullable = true)
+    private String Description;
+
     @OneToMany(
         mappedBy = "wiki",
         cascade = CascadeType.ALL,

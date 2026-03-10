@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { Divider, Spin, Alert } from "antd";
 import HeroSection from "../components/home/HeroSection";
-import RecentPages from "../components/home/RecentPages";
-import AllPages from "../components/home/AllPages";
-import { getPages } from "../api/pages";
+import RecentWiki from "../components/home/RecentWiki";
+import AllWiki from "../components/home/AllWiki";
+import { getWiki } from "../api/wiki";
 import Header from "../components/common/Header";
+
+
 export default function HomePage() {
-  const [pages, setPages] = useState(null);
+  const [wiki, setWiki] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getPages()
-      .then(setPages)
+    getWiki()
+      .then(setWiki)
       .catch(err => setError("Failed to load pages. Please try again."))
       .finally(() => setLoading(false));
   }, []);
@@ -25,9 +27,9 @@ export default function HomePage() {
       {/* <Header /> */}
       <HeroSection />
       <Divider />
-      <RecentPages pages={pages} />
+      <RecentWiki wiki={wiki} />
       <Divider />
-      <AllPages pages={pages} />
+      <AllWiki wiki={wiki} />
     </div>
   );
 }

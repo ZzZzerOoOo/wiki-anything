@@ -1,6 +1,6 @@
-curl -X POST http://13.232.61.18:8080/pages \
+curl -X POST http://13.232.61.18:8080/wiki \
   -H "Content-Type: application/json" \
-  -d '{"title":"homeee"}'
+  -d '{"title":"Factorio"}'
 
 curl -X POST http://localhost:8080/pages/1/blocks \
   -H "Content-Type: application/json" \
@@ -12,3 +12,6 @@ curl http://localhost:8080/pages/spring-boot
 curl -X DELETE http://13.232.61.18:8080/pages \
   -H "Content-Type: application/json" \
   -d '{"title":"homee"}'
+
+curl http://13.232.61.18:8080/wiki 
+  docker exec -it wiki-db psql -U wikiuser -d wikianything

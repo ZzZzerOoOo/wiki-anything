@@ -1,12 +1,15 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-export async function createPage(page) {
+export async function createPage(wikiId,title) {
+
   const res = await fetch(`${BASE_URL}/pages`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(page),
+    body: JSON.stringify({title: title,
+      wiki_id: wikiId
+  }),
   });
 
   if (!res.ok) {
@@ -16,8 +19,8 @@ export async function createPage(page) {
   return res.json();
 }
 
-export async function getPageBySlug(slug) {
-  const res = await fetch(`${BASE_URL}/pages/${slug}`);
+export async function getPageBySlug(wikiId,slug) {
+  const res = await fetch(`${BASE_URL}/pages/${wikiId}/${slug}`);
   if (!res.ok) {
     throw new Error("Page not found");
   }
@@ -32,8 +35,8 @@ export async function getPages() {
   return res.json();
 }
 
-export async function deletePage(slug) {
-  const res = await fetch(`${BASE_URL}/pages/${slug}`, {
+export async function deletePage(wikiId,slug) {
+  const res = await fetch(`${BASE_URL}/pages/${wikiId}/${slug}`, {
     method: "DELETE",
   });
 }
