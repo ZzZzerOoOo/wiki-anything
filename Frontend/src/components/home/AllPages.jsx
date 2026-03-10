@@ -10,7 +10,7 @@ export default function AllPages({ pages }) {
       <Title level={4}>All Pages</Title>
 
       {( pages == null || pages.length === 0) ? (
-        <EmptyState />
+        <>No pages yet.</>
       ) : (
         <List
           bordered

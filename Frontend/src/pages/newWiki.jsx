@@ -10,7 +10,7 @@ export default function NewWiki() {
 
   const onFinish = async (values) => {
     try {
-      const page = await createWiki(values);
+      const wiki = await createWiki(values);
       message.success("Wiki created");
       navigate(`/wiki/${wiki.slug}`);
     } catch (error) {

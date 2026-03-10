@@ -66,9 +66,9 @@ function WikiView() {
     //   blocks: newBlocks,
     // }));
     // }
-  if (error)   return (
-    <NotFound />
-  );
+  // if (error)   return (
+  //   <NotFound />
+  // );
 //   function confirmDelete() {
 //     Modal.confirm({
 //       title: "Delete Page?",
