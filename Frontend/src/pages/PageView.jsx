@@ -6,18 +6,19 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import NotFound from "./NotFound";
 import { deleteBlock,editBlock, updateBlock } from "../api/blocks";
-import { Button, Modal, Form ,Typography} from "antd";
+import { Button, Modal, Form, Typography, Spin, Alert } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import { deletePage } from "../api/pages";
 import { useNavigate } from "react-router-dom"; 
 import Header from "../components/common/Header";
+const { Title, Paragraph } = Typography;
 
 function PageView() {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
   const [page, setPage] = useState(null);
   const [error, setError] = useState(null);
-  const { Title, Paragraph } = Typography;
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -26,9 +27,11 @@ function PageView() {
   useEffect(() => {
     setError(null);
     setPage(null);
+    setLoading(true);
     getPageBySlug(slug)
       .then(setPage)
-      .catch(err => setError(err.message));
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
   }, [slug]);
 
   function handleBlockAdded(block) {
@@ -77,7 +80,9 @@ function PageView() {
       },
     });
   }
-  if (!page) return <p>Loading...</p>;
+
+  if (loading) return <Spin size="large" style={{ display: "block", marginTop: 80 }} />;
+  if (error) return <Alert type="error" message="Page not found or failed to load." />;
 
   return (
     <div>
@@ -131,7 +136,7 @@ function PageView() {
         style={{ marginTop: 16 }}
         onClick={confirmDelete}
       >
-        + Delete page
+        Delete page
     </Button>
     </div>
   );

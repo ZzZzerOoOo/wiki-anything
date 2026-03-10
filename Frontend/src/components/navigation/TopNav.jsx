@@ -15,7 +15,7 @@ export default function TopNav() {
         justifyContent: "space-between",
         alignItems: "center",
         background: "#9cc6db",
-        borderBottom: "2px solid #FCF6D9",
+        // borderBottom: "2px solid #FCF6D9",
         padding: "0 24px",
       }}
     >

@@ -7,12 +7,9 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.PrePersist;
@@ -25,33 +22,31 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "pages")
+@Table(name = "wiki")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Page {
-
+public class Wiki {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @NotBlank
     @Column(nullable = false)
-    private String title;
+    private String topic;
 
     @NotBlank
     @Column(nullable = false, unique = true)
     private String slug;
 
-    
     @OneToMany(
-            mappedBy = "page",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+        mappedBy = "wiki",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
     )
     @OrderBy("orderIndex ASC")
-    private List<Block> blocks = new ArrayList<>();
+    private List<Page> pages = new ArrayList<>();
 
 
     @Column(name = "created_at", nullable = false)
@@ -72,8 +67,4 @@ public class Page {
     protected void onUpdate() {
         this.updatedAt = Instant.now();
     }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "wiki_id", nullable = false)
-    private Wiki wiki;
 }

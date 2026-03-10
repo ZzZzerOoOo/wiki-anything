@@ -44,18 +44,18 @@ public class BlockService {
         page.setUpdatedAt(Instant.now());
         return toBlockResponse(saved);
     }
-    public List<BlockResponse> deleteBlock(Long pageId, int blockOrdexIndex) {
+    public List<BlockResponse> deleteBlock(Long pageId, int blockOrderIndex) {
         Page page = pageRepository.findById(pageId)
                 .orElseThrow(() -> new IllegalArgumentException("Page not found"));
             
         Block block = page.getBlocks().stream()
-                .filter(b -> b.getOrderIndex() == blockOrdexIndex)
+                .filter(b -> b.getOrderIndex() == blockOrderIndex)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Block not found"));
                 System.out.println("ii");
         page.getBlocks().remove(block);
         for(Block b : page.getBlocks()){
-            if(b.getOrderIndex() > blockOrdexIndex) {
+            if(b.getOrderIndex() > blockOrderIndex) {
                 b.setOrderIndex(b.getOrderIndex()-1);
             }
         }
