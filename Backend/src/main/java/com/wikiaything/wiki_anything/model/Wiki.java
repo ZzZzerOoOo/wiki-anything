@@ -45,7 +45,7 @@ public class Wiki {
         cascade = CascadeType.ALL,
         orphanRemoval = true
     )
-    @OrderBy("orderIndex ASC")
+    @OrderBy("id ASC")
     private List<Page> pages = new ArrayList<>();
 
 
